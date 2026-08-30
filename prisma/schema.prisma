@@ -19,6 +19,7 @@ model Message {
   name      String
   email     String   @unique
   message   String
+  tag       String?
   authorId  String?
   createdAt DateTime @default(now())
 }
@@ -32,4 +33,12 @@ model Todo {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   isDeleted   Boolean  @default(false)
+}
+
+model CommentReaction {
+  id        String   @id @default(cuid())
+  commentId String
+  emoji     String
+  userId    String
+  createdAt DateTime @default(now())
 }
