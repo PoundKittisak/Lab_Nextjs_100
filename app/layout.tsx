@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NavActions } from "@/components/NavActions";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,21 +30,27 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-screen bg-gray-50 text-gray-900">
-        <nav className="flex items-center gap-6 bg-blue-900 px-8 py-4 text-white shadow-lg">
-          <Link href="/" className="text-xl font-bold text-white hover:text-blue-300">
-            📝 My Blog
-          </Link>
-          <div className="ml-4 flex gap-4">
-            <Link href="/posts" className="transition-colors hover:text-blue-300">
-              บทความ
+        <nav className="flex flex-wrap items-center justify-between gap-4 bg-blue-900 px-8 py-4 text-white shadow-lg">
+          <div className="flex items-center gap-6">
+            <Link href="/" className="text-xl font-bold text-white hover:text-blue-300">
+              📝 My Blog
             </Link>
-            <Link href="/users" className="transition-colors hover:text-blue-300">
-              ผู้ใช้
-            </Link>
-            <Link href="/about" className="transition-colors hover:text-blue-300">
-              เกี่ยวกับ
-            </Link>
+            <div className="hidden items-center gap-4 md:flex">
+              <Link href="/posts" className="transition-colors hover:text-blue-300">
+                บทความ
+              </Link>
+              <Link href="/users" className="transition-colors hover:text-blue-300">
+                ผู้ใช้
+              </Link>
+              <Link href="/contact" className="transition-colors hover:text-blue-300">
+                ติดต่อเรา
+              </Link>
+              <Link href="/about" className="transition-colors hover:text-blue-300">
+                เกี่ยวกับ
+              </Link>
+            </div>
           </div>
+          <NavActions />
         </nav>
 
         <div className="mx-auto max-w-4xl px-4 py-8">{children}</div>
