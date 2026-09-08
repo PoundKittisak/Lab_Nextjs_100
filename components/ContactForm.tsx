@@ -6,6 +6,7 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [tag, setTag] = useState('general');
   const [error, setError] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -31,7 +32,7 @@ export default function ContactForm() {
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message }),
+      body: JSON.stringify({ name, email, message, tag }),
     });
 
     if (!res.ok) {
@@ -43,6 +44,7 @@ export default function ContactForm() {
     setName('');
     setEmail('');
     setMessage('');
+    setTag('general');
   }
 
   const isValid =
@@ -64,6 +66,16 @@ export default function ContactForm() {
         placeholder="อีเมล"
         className="w-full rounded border border-gray-300 p-2"
       />
+      <select
+        value={tag}
+        onChange={(e) => setTag(e.target.value)}
+        className="w-full rounded border border-gray-300 p-2 text-gray-700"
+      >
+        <option value="general">หมวดหมู่ทั่วไป (General)</option>
+        <option value="inquiry">สอบถามข้อมูล (Inquiry)</option>
+        <option value="feedback">ข้อเสนอแนะ (Feedback)</option>
+        <option value="bug">แจ้งปัญหาการใช้งาน (Bug Report)</option>
+      </select>
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -71,9 +83,9 @@ export default function ContactForm() {
         className="w-full rounded border border-gray-300 p-2"
       />
       {error ? <p className="text-sm text-red-600">{error}</p> : null}
-      {status === 'sending' && <p className="text-gray-400">กําลังส่ง...</p>}
-      {status === 'success' && <p className="text-green-600">ส่งสําเร็จ ขอบคุณครับ/ค่ะ!</p>}
-      {status === 'error' && <p className="text-red-600">ส่งไม่สําเร็จ ลองใหม่อีกครั้ง</p>}
+      {status === 'sending' && <p className="text-gray-400">กำลังส่ง...</p>}
+      {status === 'success' && <p className="text-green-600">ส่งสำเร็จ ขอบคุณครับ/ค่ะ!</p>}
+      {status === 'error' && <p className="text-red-600">ส่งไม่สำเร็จ ลองใหม่อีกครั้ง</p>}
       <button
         type="submit"
         disabled={!isValid || status === 'sending'}
