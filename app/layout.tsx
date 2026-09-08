@@ -56,7 +56,7 @@ export default function RootLayout({
         <div className="mx-auto max-w-4xl px-4 py-8">{children}</div>
 
         <footer className="mt-8 border-t py-6 text-center text-sm text-gray-400">
-          <p>© 2026 My Blog — สร้างด้วย Next.js + TypeScript</p>
+          <p>© 2026 My Blog — สร้างด้วย Next.js + TypeScript (Verified Deployment - Lab 12)</p>
           <p className="mt-1">0214321 Web App Design & Development</p>
         </footer>
       </body>
